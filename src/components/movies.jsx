@@ -8,8 +8,7 @@ class Movies extends Component {
   };
 
   handleDelete = (movie) => {
-    console.log(movie.target.id);
-    deleteMovie(movie.target.id);
+    deleteMovie(movie._id);
     this.setState({ movies: getMovies() });
   };
   renderComponents() {
@@ -23,11 +22,11 @@ class Movies extends Component {
       return (
         <React.Fragment>
           <h1>Showing {this.state.movies.length} movies in the database</h1>
-          <table>
+          <table className="table">
             <thead>
               <tr>
                 {this.state.titles.map((title) => (
-                  <th className="table-primary col-2" key={title}>
+                  <th scope="col" key={title}>
                     {title}
                   </th>
                 ))}
@@ -42,10 +41,9 @@ class Movies extends Component {
                   <td>{movie.dailyRentalRate}</td>
                   <td>
                     <button
-                      id={movie._id}
                       key={movie._id}
-                      onClick={this.handleDelete}
-                      className="btn btn-secondary btn-sm"
+                      onClick={() => this.handleDelete(movie)}
+                      className="btn btn-danger btn-sm"
                     >
                       Delete
                     </button>

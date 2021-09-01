@@ -8,8 +8,8 @@ class Movies extends Component {
   };
 
   handleDelete = (movie) => {
-    deleteMovie(movie._id);
-    this.setState({ movies: getMovies() });
+    const movies = this.state.movies.filter((m) => m._id !== movie._id);
+    this.setState({ movies });
   };
   renderComponents() {
     if (this.state.movies.length === 0) {

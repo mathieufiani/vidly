@@ -1,3 +1,9 @@
+# Vidly
+This is a small web page that has been built using React where there is a database of movies and it is possible to delete movies from the database
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

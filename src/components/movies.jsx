@@ -3,6 +3,7 @@ import Movie from "./Movie";
 class Movies extends Component {
   renderComponents() {
     const { onDelete, movies, titles, onLike } = this.props;
+    console.log(movies);
     if (movies.length !== 0) {
       return (
         <React.Fragment>
@@ -14,6 +15,8 @@ class Movies extends Component {
                     {title}
                   </th>
                 ))}
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -22,6 +25,7 @@ class Movies extends Component {
                   key={movie._id}
                   movie={movie}
                   onDelete={onDelete}
+                  liked={true}
                   onLike={onLike}
                 />
               ))}

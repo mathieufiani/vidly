@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Like from "./Like";
+import Like from "./common/Like";
 class Movie extends Component {
   render() {
     const { movie, onLike } = this.props;
@@ -10,7 +10,11 @@ class Movie extends Component {
         <td>{movie.numberInStock}</td>
         <td>{movie.dailyRentalRate}</td>
         <td>
-          <Like onLike={onLike} movie={movie} />
+          <Like
+            movie={movie}
+            liked={movie.liked}
+            onClick={() => onLike(movie)}
+          />
         </td>
         <td>
           <button

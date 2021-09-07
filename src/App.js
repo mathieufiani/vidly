@@ -26,7 +26,6 @@ class App extends Component {
 
   handleLike = (movie) => {
     const movies = this.state.movies;
-    console.log(movie);
     movie.like = !movie.like;
     this.setState({ movies });
   };

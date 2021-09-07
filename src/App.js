@@ -10,6 +10,15 @@ class App extends Component {
     titles: ["title", "Genre", "Stock", "rate"],
   };
 
+  constructor() {
+    super();
+    this.createLikeAttr();
+  }
+  createLikeAttr() {
+    this.state.movies.map((movie) => {
+      return (movie.like = false);
+    });
+  }
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
@@ -17,7 +26,8 @@ class App extends Component {
 
   handleLike = (movie) => {
     const movies = this.state.movies;
-    movie.like = true;
+    console.log(movie);
+    movie.like = !movie.like;
     this.setState({ movies });
   };
   render() {

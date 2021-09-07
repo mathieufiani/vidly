@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Like from "./Like";
 class Movie extends Component {
   render() {
-    const { movie } = this.props;
+    const { movie, onLike } = this.props;
     return (
       <tr key={movie.title}>
         <td>{movie.title}</td>
@@ -10,7 +10,7 @@ class Movie extends Component {
         <td>{movie.numberInStock}</td>
         <td>{movie.dailyRentalRate}</td>
         <td>
-          <Like />
+          <Like onLike={onLike} movie={movie} />
         </td>
         <td>
           <button

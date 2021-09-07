@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Movie from "./Movie";
 class Movies extends Component {
   renderComponents() {
-    const { onDelete, movies, titles } = this.props;
+    const { onDelete, movies, titles, onLike } = this.props;
     if (movies.length !== 0) {
       return (
         <React.Fragment>
@@ -18,7 +18,12 @@ class Movies extends Component {
             </thead>
             <tbody>
               {movies.map((movie) => (
-                <Movie key={movie._id} movie={movie} onDelete={onDelete} />
+                <Movie
+                  key={movie._id}
+                  movie={movie}
+                  onDelete={onDelete}
+                  onLike={onLike}
+                />
               ))}
             </tbody>
           </table>

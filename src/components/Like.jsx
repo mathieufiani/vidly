@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 
-class Like extends React.Component {
+class Like extends Component {
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      </div>
+    );
   }
   liked() {}
 }

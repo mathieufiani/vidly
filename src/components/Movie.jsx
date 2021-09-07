@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Like from "./Like";
 class Movie extends Component {
   render() {
     const { movie } = this.props;
@@ -8,6 +9,9 @@ class Movie extends Component {
         <td>{movie.genre.name}</td>
         <td>{movie.numberInStock}</td>
         <td>{movie.dailyRentalRate}</td>
+        <td>
+          <Like />
+        </td>
         <td>
           <button
             key={movie._id}

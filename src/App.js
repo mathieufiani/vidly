@@ -14,6 +14,12 @@ class App extends Component {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
   };
+
+  handleLike = (movie) => {
+    const movies = this.state.movies;
+    movie.like = true;
+    this.setState({ movies });
+  };
   render() {
     return (
       <div>
@@ -22,6 +28,7 @@ class App extends Component {
           movies={this.state.movies}
           titles={this.state.titles}
           onDelete={this.handleDelete}
+          onLike={this.handleLike}
         ></Movies>
       </div>
     );

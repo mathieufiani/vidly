@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Movie from "./Movie";
 import { getMovies } from "../fakeMovieService";
 
 class Movies extends Component {
@@ -34,21 +35,7 @@ class Movies extends Component {
             </thead>
             <tbody>
               {this.state.movies.map((movie) => (
-                <tr key={movie.title}>
-                  <td>{movie.title}</td>
-                  <td>{movie.genre.name}</td>
-                  <td>{movie.numberInStock}</td>
-                  <td>{movie.dailyRentalRate}</td>
-                  <td>
-                    <button
-                      key={movie._id}
-                      onClick={() => this.handleDelete(movie)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+                <Movie />
               ))}
             </tbody>
           </table>

@@ -1,25 +1,23 @@
 import React, { Component } from "react";
-class Movie extends React.Component {
+class Movie extends Component {
   render() {
-    const { movies } = this.props.movies;
+    const { movie } = this.props;
     return (
-      <div>
-        <tr key={movies.title}>
-          <td>{movies.title}</td>
-          <td>{movies.genre.name}</td>
-          <td>{movies.numberInStock}</td>
-          <td>{movies.dailyRentalRate}</td>
-          <td>
-            <button
-              key={movies._id}
-              onClick={() => this.handleDelete(movies)}
-              className="btn btn-danger btn-sm"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      </div>
+      <tr key={movie.title}>
+        <td>{movie.title}</td>
+        <td>{movie.genre.name}</td>
+        <td>{movie.numberInStock}</td>
+        <td>{movie.dailyRentalRate}</td>
+        <td>
+          <button
+            key={movie._id}
+            onClick={() => this.props.onDelete(movie)}
+            className="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
     );
   }
 }

@@ -3,7 +3,7 @@ const filter = (props) => {
   const { genres, active_genre, set_active_genre } = props;
   const allGenres = [{ _id: "0", name: "all Genre" }, ...genres];
   return (
-    <ul className="list-group">
+    <ul className="list-group ml-3 mr-5">
       {allGenres.map((genre, index) => {
         return (
           <li

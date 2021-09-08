@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
+import Pagination from "./common/pagination";
 class Movies extends Component {
   renderComponents() {
-    const { onDelete, movies, titles, onLike } = this.props;
+    const {
+      onDelete,
+      movies,
+      titles,
+      onLike,
+      active_page,
+      nbPage,
+      set_active_page,
+      itemsCount,
+    } = this.props;
     if (movies.length !== 0) {
       return (
-        <React.Fragment>
-          <table className="table float-right w-75">
+        <div className="d-block w-100">
+          <table className="table">
             <thead>
               <tr>
                 {titles.map((title) => (
@@ -30,7 +40,14 @@ class Movies extends Component {
               ))}
             </tbody>
           </table>
-        </React.Fragment>
+          <Pagination
+            className="row"
+            nbPage={nbPage}
+            set_active_page={set_active_page}
+            active_page={active_page}
+            itemsCount={itemsCount}
+          />
+        </div>
       );
     } else {
       return <React.Fragment></React.Fragment>;

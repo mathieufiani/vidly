@@ -3,7 +3,6 @@ import Movies from "./components/movies";
 import Title from "./components/Title";
 import React, { Component } from "react";
 import { getMovies } from "./fakeMovieService";
-import Pagination from "./components/common/pagination";
 import paginate from "./utils/Paginate";
 import Filter from "./components/common/filter";
 import { getGenres } from "./fakeGenreService";
@@ -54,24 +53,23 @@ class App extends Component {
     return (
       <div className="container row row-cols-2">
         <Title movies={allMovies} />
-        <Filter
-          genres={genres}
-          active_genre={activeGenre}
-          set_active_genre={this.setActiveGenre}
-        ></Filter>
-        <Movies
-          movies={movies}
-          titles={titles}
-          onDelete={this.handleDelete}
-          onLike={this.handleLike}
-        ></Movies>
-        <Pagination
-          className="row"
-          nbPage={this.handlePagination()}
-          set_active_page={this.setActivePage}
-          active_page={activePage}
-          itemsCount={allMovies.length}
-        ></Pagination>
+        <div className="d-flex w-100">
+          <Filter
+            genres={genres}
+            active_genre={activeGenre}
+            set_active_genre={this.setActiveGenre}
+          />
+          <Movies
+            movies={movies}
+            titles={titles}
+            onDelete={this.handleDelete}
+            onLike={this.handleLike}
+            nbPage={this.handlePagination()}
+            set_active_page={this.setActivePage}
+            active_page={activePage}
+            itemsCount={allMovies.length}
+          />
+        </div>
       </div>
     );
   }

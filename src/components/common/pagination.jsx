@@ -1,13 +1,6 @@
 import React from "react";
 import _ from "lodash";
-const Pagination = ({
-  nbPage,
-  active_page,
-  set_active_page,
-  itemsCount,
-  pageSize,
-}) => {
-  const pagesCount = itemsCount / pageSize;
+const Pagination = ({ nbPage, active_page, set_active_page }) => {
   if (nbPage === 1) return null;
   return (
     <React.Fragment>

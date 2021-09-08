@@ -4,7 +4,7 @@ import Title from "./components/Title";
 import React, { Component } from "react";
 import { getMovies } from "./fakeMovieService";
 import Pagination from "./components/common/pagination";
-
+import paginate from "./utils/Paginate";
 class App extends Component {
   state = {
     movies: getMovies(),
@@ -13,18 +13,14 @@ class App extends Component {
     pageSize: 4,
   };
   setActivePage = (index) => {
-    let activePage = this.state.activePage;
-    activePage = index;
-    this.setState({ activePage });
+    this.setState({ activePage: index });
   };
   handlePagination = () => {
     const len = this.state.movies.length;
     const nbPage = this.state.pageSize;
     return Math.ceil(len / nbPage);
   };
-  handlePageChange = (page) => {
-    console.log(page);
-  };
+
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
@@ -37,21 +33,17 @@ class App extends Component {
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   };
-  setMoviesToShow = () => {
-    const indexToget = this.state.activePage;
-    const numFilmOnPage = this.state.pageSize;
-    const currentMovies = this.state.movies.slice(
-      indexToget * numFilmOnPage,
-      (indexToget + 1) * numFilmOnPage
-    );
-    return currentMovies;
-  };
   render() {
+    const movies = paginate(
+      this.state.movies,
+      this.state.pageSize,
+      this.state.activePage + 1
+    );
     return (
       <div>
         <Title movies={this.state.movies} />
         <Movies
-          movies={this.setMoviesToShow()}
+          movies={movies}
           titles={this.state.titles}
           onDelete={this.handleDelete}
           onLike={this.handleLike}
@@ -61,9 +53,6 @@ class App extends Component {
           set_active_page={this.setActivePage}
           active_page={this.state.activePage}
           itemsCount={this.state.movies.length}
-          pageSize={this.state.pageSize}
-          onPageChange={this.handlePageChange}
-          key={this.state.rendered}
         ></Pagination>
       </div>
     );

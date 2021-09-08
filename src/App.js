@@ -6,6 +6,7 @@ import { getMovies } from "./fakeMovieService";
 import paginate from "./utils/Paginate";
 import Filter from "./components/common/filter";
 import { getGenres } from "./fakeGenreService";
+import filtering from "./utils/filtering";
 class App extends Component {
   state = {
     movies: getMovies(),
@@ -49,10 +50,11 @@ class App extends Component {
       genres,
       activeGenre,
     } = this.state;
-    const movies = paginate(allMovies, pageSize, activePage + 1);
+    let movies = filtering(allMovies, activeGenre);
+    let moviesPag = paginate(movies, pageSize, activePage + 1);
     return (
       <div className="container row row-cols-2">
-        <Title movies={allMovies} />
+        <Title movies={movies} />
         <div className="d-flex w-100">
           <Filter
             genres={genres}
@@ -60,7 +62,7 @@ class App extends Component {
             set_active_genre={this.setActiveGenre}
           />
           <Movies
-            movies={movies}
+            movies={moviesPag}
             titles={titles}
             onDelete={this.handleDelete}
             onLike={this.handleLike}

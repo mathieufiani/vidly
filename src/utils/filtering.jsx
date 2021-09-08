@@ -3,7 +3,9 @@ function filtering(items, activeGenre) {
     console.log(items);
     return items;
   }
-  return items.filter((m) => m.genre._id === activeGenre);
+  let filterItem = items.filter((m) => m.genre._id === activeGenre);
+  console.log(filterItem);
+  return filterItem;
 }
 
 export default filtering;

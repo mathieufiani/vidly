@@ -15,16 +15,18 @@ class App extends Component {
     activePage: 0,
     pageSize: 4,
     activeGenre: "0",
+    filteredMovies: getMovies(),
   };
-
   setActivePage = (index) => {
     this.setState({ activePage: index });
   };
   setActiveGenre = (id) => {
     this.setState({ activeGenre: id });
+    let movies = filtering(this.state.movies, this.state.activeGenre);
+    this.setState({ filteredMovies: movies });
   };
   handlePagination = () => {
-    const len = this.state.movies.length;
+    const len = this.state.filteredMovies.length;
     const nbPage = this.state.pageSize;
     return Math.ceil(len / nbPage);
   };
@@ -41,6 +43,7 @@ class App extends Component {
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   };
+
   render() {
     const {
       movies: allMovies,
@@ -49,17 +52,17 @@ class App extends Component {
       pageSize,
       genres,
       activeGenre,
+      filteredMovies,
     } = this.state;
-    let movies = filtering(allMovies, activeGenre);
-    let moviesPag = paginate(movies, pageSize, activePage + 1);
+    let moviesPag = paginate(filteredMovies, pageSize, activePage + 1);
     return (
       <div className="container row row-cols-2">
-        <Title movies={movies} />
+        <Title movies={filteredMovies} />
         <div className="d-flex w-100">
           <Filter
+            set_active_genre={this.setActiveGenre}
             genres={genres}
             active_genre={activeGenre}
-            set_active_genre={this.setActiveGenre}
           />
           <Movies
             movies={moviesPag}

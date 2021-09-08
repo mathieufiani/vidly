@@ -4,14 +4,14 @@ const filter = (props) => {
   const allGenres = [{ _id: "0", name: "all Genre" }, ...genres];
   return (
     <ul className="list-group ml-3 mr-5">
-      {allGenres.map((genre, index) => {
+      {allGenres.map((genre) => {
         return (
           <li
+            onClick={() => set_active_genre(genre._id)}
             key={genre._id}
             className={
               "list-group-item " + (active_genre === genre._id && "active")
             }
-            onClick={() => set_active_genre(genre._id)}
             style={{ cursor: "pointer" }}
           >
             {genre.name}

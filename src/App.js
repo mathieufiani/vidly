@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { getMovies } from "./fakeMovieService";
 import Pagination from "./components/common/pagination";
 import paginate from "./utils/Paginate";
+import Filter from "./components/common/filter";
 class App extends Component {
   state = {
     movies: getMovies(),
@@ -12,6 +13,7 @@ class App extends Component {
     activePage: 0,
     pageSize: 4,
   };
+
   setActivePage = (index) => {
     this.setState({ activePage: index });
   };
@@ -34,25 +36,23 @@ class App extends Component {
     this.setState({ movies });
   };
   render() {
-    const movies = paginate(
-      this.state.movies,
-      this.state.pageSize,
-      this.state.activePage + 1
-    );
+    const { movies: allMovies, titles, activePage, pageSize } = this.state;
+    const movies = paginate(allMovies, pageSize, activePage + 1);
     return (
       <div>
-        <Title movies={this.state.movies} />
+        <Title movies={allMovies} />
+        <Filter></Filter>
         <Movies
           movies={movies}
-          titles={this.state.titles}
+          titles={titles}
           onDelete={this.handleDelete}
           onLike={this.handleLike}
         ></Movies>
         <Pagination
           nbPage={this.handlePagination()}
           set_active_page={this.setActivePage}
-          active_page={this.state.activePage}
-          itemsCount={this.state.movies.length}
+          active_page={activePage}
+          itemsCount={allMovies.length}
         ></Pagination>
       </div>
     );

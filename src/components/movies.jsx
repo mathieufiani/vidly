@@ -6,7 +6,7 @@ class Movies extends Component {
     if (movies.length !== 0) {
       return (
         <React.Fragment>
-          <table className="table">
+          <table className="table float-right w-75">
             <thead>
               <tr>
                 {titles.map((title) => (

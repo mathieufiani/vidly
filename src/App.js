@@ -6,16 +6,22 @@ import { getMovies } from "./fakeMovieService";
 import Pagination from "./components/common/pagination";
 import paginate from "./utils/Paginate";
 import Filter from "./components/common/filter";
+import { getGenres } from "./fakeGenreService";
 class App extends Component {
   state = {
     movies: getMovies(),
+    genres: getGenres(),
     titles: ["title", "Genre", "Stock", "rate"],
     activePage: 0,
     pageSize: 4,
+    activeGenre: "0",
   };
 
   setActivePage = (index) => {
     this.setState({ activePage: index });
+  };
+  setActiveGenre = (id) => {
+    this.setState({ activeGenre: id });
   };
   handlePagination = () => {
     const len = this.state.movies.length;
@@ -36,12 +42,23 @@ class App extends Component {
     this.setState({ movies });
   };
   render() {
-    const { movies: allMovies, titles, activePage, pageSize } = this.state;
+    const {
+      movies: allMovies,
+      titles,
+      activePage,
+      pageSize,
+      genres,
+      activeGenre,
+    } = this.state;
     const movies = paginate(allMovies, pageSize, activePage + 1);
     return (
-      <div>
+      <div className="container row row-cols-2">
         <Title movies={allMovies} />
-        <Filter></Filter>
+        <Filter
+          genres={genres}
+          active_genre={activeGenre}
+          set_active_genre={this.setActiveGenre}
+        ></Filter>
         <Movies
           movies={movies}
           titles={titles}
@@ -49,6 +66,7 @@ class App extends Component {
           onLike={this.handleLike}
         ></Movies>
         <Pagination
+          className="row"
           nbPage={this.handlePagination()}
           set_active_page={this.setActivePage}
           active_page={activePage}

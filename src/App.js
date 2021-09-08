@@ -3,7 +3,7 @@ import Movies from "./components/movies";
 import Title from "./components/Title";
 import React, { Component } from "react";
 import { getMovies } from "./fakeMovieService";
-import Pagination from "./components/pagination";
+import Pagination from "./components/common/pagination";
 
 class App extends Component {
   state = {

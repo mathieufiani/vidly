@@ -10,6 +10,7 @@ class App extends Component {
     movies: getMovies(),
     titles: ["title", "Genre", "Stock", "rate"],
     activePage: 0,
+    pageSize: 4,
   };
   setActivePage = (index) => {
     let activePage = this.state.activePage;
@@ -18,8 +19,11 @@ class App extends Component {
   };
   handlePagination = () => {
     const len = this.state.movies.length;
-    const nbPage = 4;
+    const nbPage = this.state.pageSize;
     return Math.ceil(len / nbPage);
+  };
+  handlePageChange = (page) => {
+    console.log(page);
   };
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
@@ -35,7 +39,7 @@ class App extends Component {
   };
   setMoviesToShow = () => {
     const indexToget = this.state.activePage;
-    const numFilmOnPage = 4;
+    const numFilmOnPage = this.state.pageSize;
     const currentMovies = this.state.movies.slice(
       indexToget * numFilmOnPage,
       (indexToget + 1) * numFilmOnPage
@@ -56,6 +60,9 @@ class App extends Component {
           nbPage={this.handlePagination()}
           set_active_page={this.setActivePage}
           active_page={this.state.activePage}
+          itemsCount={this.state.movies.length}
+          pageSize={this.state.pageSize}
+          onPageChange={this.handlePageChange}
           key={this.state.rendered}
         ></Pagination>
       </div>

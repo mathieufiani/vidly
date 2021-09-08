@@ -1,13 +1,18 @@
 import React from "react";
-
-const Pagination = ({ nbPage, active_page, set_active_page }) => {
-  //const numPage = nbPage.nbPage;
-  //const [activePage, setActivePage] = useState(1);
-
+import _ from "lodash";
+const Pagination = ({
+  nbPage,
+  active_page,
+  set_active_page,
+  itemsCount,
+  pageSize,
+}) => {
+  const pagesCount = itemsCount / pageSize;
+  if (nbPage === 1) return null;
   return (
     <React.Fragment>
       <ul className="pagination">
-        {[...Array(nbPage)].map((element, index) => (
+        {_.range(1, nbPage + 1).map((element, index) => (
           <li
             key={index}
             className={"page-item " + (active_page === index && "active")}

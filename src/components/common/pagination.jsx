@@ -1,5 +1,7 @@
 import React from "react";
 import _ from "lodash";
+import PropTypes from "prop-types";
+
 const Pagination = ({ nbPage, active_page, set_active_page }) => {
   if (nbPage === 1) return null;
   return (
@@ -23,4 +25,9 @@ const Pagination = ({ nbPage, active_page, set_active_page }) => {
   );
 };
 
+Pagination.propTypes = {
+  nbPage: PropTypes.number.isRequired,
+  active_page: PropTypes.number.isRequired,
+  set_active_page: PropTypes.func.isRequired,
+};
 export default Pagination;
